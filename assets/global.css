@@ -1,0 +1,26 @@
+* {
+  /* max-width: 100%; */
+}
+
+body {
+  background: #111;
+  color: #eee;
+  /* max-width: 100em; */
+  margin: 0;
+  /* padding: 1em; */
+  word-wrap: break-word;
+}
+
+a {
+  color: tan;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  display: block;
+}
