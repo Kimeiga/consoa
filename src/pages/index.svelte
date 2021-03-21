@@ -3,16 +3,14 @@
   metatags.title = "consoa";
   metatags.description = "Description coming soon...";
 
-  import { User, Collection } from "sveltefire";
+  import { Collection } from "sveltefire";
 
   let postText = "";
   let postImgURL = "";
 
   export let scoped;
-  $: ({ user, auth } = scoped);
+  $: ({ user } = scoped);
   let user;
-  let auth;
-  $: console.log(user);
 
   const onImageLoad = (e) => {
     console.log(e);
@@ -30,7 +28,7 @@
     No posts yet...
   {/if}
 
-  <section>
+  <section id="posts">
     <!-- class:wide="{current === 'foo'}"  -->
     {#each posts as post}
       <div class="post">
@@ -57,38 +55,29 @@
       </div>
     {/each}
   </section>
-
-  <input type="text" bind:value={postText} />
-  <input type="text" bind:value={postImgURL} />
-
-  <button
-    on:click={() =>
-      postsRef.add({
-        text: postText,
-        createdAt: Date.now(),
-        creatorID: user.uid,
-        creatorName: user.displayName,
-        creatorPhoto: user.photoURL,
-        imgURL: postImgURL,
-      })}
-  >
-    Add Post
-  </button>
-
   <span slot="loading">Loading posts...</span>
 </Collection>
 
 <style>
   .post-image {
-    object-fit: cover;
-    height: 100%;
+    /* object-fit: cover; */
+    /* height: 100%; */
     width: 100%;
+    display: block;
   }
 
-  section {
+  #posts {
+    column-width: calc(100px + 5vw);
+    column-gap: 0;
+    margin-bottom: 100px;
+    column-count: 10;
+
+    max-width: 100% !important;
+    padding: 0;
+  }
+
+  /* section {
     display: grid;
-    /* calc(120px + 5vw) */
-    /* minmax(1fr, 3fr) */
     grid-template-columns: repeat(auto-fit, minmax(calc(100px + 5vw), 1fr));
     grid-auto-rows: 1fr;
   }
@@ -104,5 +93,5 @@
   section > *:first-child {
     grid-row: 1 / 1;
     grid-column: 1 / 1;
-  }
+  } */
 </style>

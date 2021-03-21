@@ -11,9 +11,7 @@
 <User persist={localStorage} let:user let:auth>
   <Navbar profileImgURL={user.photoURL} />
 
-  <main>
-    <slot scoped={{ user, auth }} />
-  </main>
+  <slot scoped={{ user, auth }} />
 
   <div slot="signed-out">
     <h1>Consoa</h1>
@@ -30,8 +28,4 @@
 </User>
 
 <style>
-  main {
-    max-width: 100rem;
-    margin: auto;
-  }
 </style>

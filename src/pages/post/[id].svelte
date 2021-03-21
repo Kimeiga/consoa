@@ -10,13 +10,19 @@
   };
 
   let theImage;
+  let zoom = false;
 </script>
 
 <Doc path={`posts/${id}`} log let:data={post} let:ref={postRef} on:data on:ref>
   <div class="post">
     {#if post.imgURL}
-      <div id="img-box">
-        <img
+      <div
+        class="img-box"
+        style="background-image: url({post.imgURL})"
+        class:zoom
+        on:click={() => (zoom = !zoom)}
+      >
+        <!-- <img
           src={post.imgURL}
           alt="post"
           class="post-image"
@@ -25,7 +31,7 @@
               ? document.exitFullscreen()
               : e.target.requestFullscreen()}
           bind:this={theImage}
-        />
+        /> -->
       </div>
     {/if}
 
@@ -36,7 +42,12 @@
     <h2>{post.text}</h2>
 
     <small>{new Date(post.createdAt)}</small>
-    <button on:click={() => postRef.delete()}>Delete</button>
+    <button
+      on:click={() => {
+        postRef.delete();
+        $goto("/");
+      }}>Delete</button
+    >
   </div>
 
   <span slot="loading">Loading...</span>
@@ -44,12 +55,25 @@
 </Doc>
 
 <style>
-  #img-box {
+  .zoom {
+    transform-origin: center top;
+    /* transform: scale(2); */
+    height: 200vh !important;
+    cursor: zoom-out !important;
+  }
+  .img-box {
     max-width: 100%;
     width: auto;
     height: calc(100vh - 1rem);
-    display: flex;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
+    /* background: var(--img-url); */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    transition: transform 0.25s ease;
+    cursor: zoom-in;
   }
   .post-image {
     max-height: 100%;
