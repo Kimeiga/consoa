@@ -22,11 +22,6 @@
     <button
       on:click={() => {
         auth.signInWithPopup(googleProvider);
-        postsRef.add({
-          text: postText,
-          createdAt: Date.now(),
-          creatorID: user.uid,
-        });
       }}
     >
       Sign In With Google

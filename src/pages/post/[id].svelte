@@ -14,21 +14,19 @@
 
 <Doc path={`posts/${id}`} log let:data={post} let:ref={postRef} on:data on:ref>
   <div class="post">
-    <!-- <p>
-				{JSON.stringify(post, Objct.keys(post).sort())}
-			</p> -->
-
     {#if post.imgURL}
-      <img
-        src={post.imgURL}
-        alt="post"
-        class="post-image"
-        on:click={(e) =>
-          e.target == document.fullscreenElement
-            ? document.exitFullscreen()
-            : e.target.requestFullscreen()}
-        bind:this={theImage}
-      />
+      <div id="img-box">
+        <img
+          src={post.imgURL}
+          alt="post"
+          class="post-image"
+          on:click={(e) =>
+            e.target == document.fullscreenElement
+              ? document.exitFullscreen()
+              : e.target.requestFullscreen()}
+          bind:this={theImage}
+        />
+      </div>
     {/if}
 
     <div class="post-creator">
@@ -46,28 +44,33 @@
 </Doc>
 
 <style>
-  /* section {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-
-  .post-creator {
-    display: flex;
-    height: 2rem;
-  }
-  .post-creator > p {
-    margin: 0;
-  }
-  .post {
-    aspect-ratio: 1 / 1;
-  } */
-
-  .post-image {
-    /* object-fit: cover; */
-    /* height: 100%; */
+  #img-box {
     max-width: 100%;
     width: auto;
-    max-height: calc(100vh - 2rem - 2px);
+    height: calc(100vh - 1rem);
+    display: flex;
+    align-items: center;
+  }
+  .post-image {
+    max-height: 100%;
+    max-width: inherit;
+    /* max-width: 100%;
+    max-height: 100%; */
+    /* width: 100%;
+    height: auto;
+    width: auto;
+    max-height: calc(100vh - 1rem); */
+    /* object-fit: cover; */
+    /* height: 100%; */
+    /* max-width: 100%;
+    width: auto;
+    max-height: calc(100vh - 1rem); */
+    /* 
+    
+    max-width: 10%;
+    max-height: 10%;
+    transform: scale(10); */
+
     display: block;
     cursor: pointer;
     margin: auto;

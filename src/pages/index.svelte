@@ -1,6 +1,6 @@
 <script>
   import { metatags } from "@roxi/routify";
-  metatags.title = "My Routify app";
+  metatags.title = "consoa";
   metatags.description = "Description coming soon...";
 
   import { User, Collection } from "sveltefire";
@@ -79,33 +79,6 @@
 </Collection>
 
 <style>
-  /* section {
-    display: grid;
-    grid-template-columns: repeat(8, minmax(0, 1fr));
-  }
-
-  .post-creator {
-    display: flex;
-    height: 2rem;
-  }
-  .post-creator > p {
-    margin: 0;
-  }
-  .post {
-    aspect-ratio: 1 / 1;
-    height: 12.5vw;
-  }
-
-  @media only screen and (max-width: 900px) {
-    .post {
-      height: 20vw;
-    }
-    section {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-    }
-  }
-
-   */
   .post-image {
     object-fit: cover;
     height: 100%;
@@ -116,7 +89,7 @@
     display: grid;
     /* calc(120px + 5vw) */
     /* minmax(1fr, 3fr) */
-    grid-template-columns: repeat(auto-fit, minmax(calc(120px + 5vw), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(calc(100px + 5vw), 1fr));
     grid-auto-rows: 1fr;
   }
 
@@ -132,6 +105,4 @@
     grid-row: 1 / 1;
     grid-column: 1 / 1;
   }
-
-  /* Just to make the grid visible */
 </style>
