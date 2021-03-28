@@ -13,7 +13,7 @@
   let zoom = false;
 </script>
 
-<Doc path={`posts/${id}`} log let:data={post} let:ref={postRef} on:data on:ref>
+<Doc path={`s/${id}`} log let:data={post} let:ref={postRef} on:data on:ref>
   <div class="post">
     {#if post.imgURL}
       <div

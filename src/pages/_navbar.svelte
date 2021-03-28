@@ -7,6 +7,8 @@
 
   <a href="/add"> <span>Add</span></a>
 
+  <a href="/groups"><span>Groups</span></a>
+
   <a href="/user">
     <span>User</span>
     <img src={profileImgURL} alt="profile" class="user-image" />
