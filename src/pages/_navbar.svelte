@@ -5,11 +5,11 @@
 <nav>
   <a href="/"><span class="brand">Consoa</span></a>
 
-  <a href="/add"> <span>Add</span></a>
-
+  <a href="/add"><span>Add</span></a>
+  
   <a href="/groups"><span>Groups</span></a>
 
-  <a href="/user">
+  <a href="/user" class="user">
     <span>User</span>
     <img src={profileImgURL} alt="profile" class="user-image" />
   </a>
@@ -18,23 +18,25 @@
 <style>
   nav {
     display: flex;
-    height: 1rem;
+    height: 2rem;
     justify-content: space-between;
     max-width: 100rem;
     margin: auto;
-    /* border-bottom: 1px solid white; */
+    align-items: center;
+    padding: 0 1rem;
   }
   nav > * {
     margin: 0;
-    height: 100%;
   }
 
   .brand {
     height: 100%;
-    /* font-size: 1rem; */
   }
-
+  .user {
+    align-items: center;
+    display: flex;
+  }
   .user-image {
-    height: 100%;
+    height: 2rem;
   }
 </style>
