@@ -5,9 +5,8 @@
 <nav>
   <a href="/"><span class="brand">Consoa</span></a>
 
-  <a href="/add"><span>Add</span></a>
-  
-  <a href="/groups"><span>Groups</span></a>
+  <!-- <a href="/add"><span>Add</span></a> -->
+  <input type="text" placeholder="add image" />
 
   <a href="/user" class="user">
     <span>User</span>

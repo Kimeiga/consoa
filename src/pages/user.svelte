@@ -2,7 +2,6 @@
   import { metatags } from "@roxi/routify";
   metatags.title = "My Routify app";
   metatags.description = "Description coming soon...";
-  import { User } from "sveltefire";
 
   import { goto } from "@roxi/routify";
   export let scoped;
@@ -11,18 +10,22 @@
   let auth;
 </script>
 
-<h1>Hi {user.displayName}</h1>
+<div style="text-align: center;">
+  <a href="/"> <h5>Return Home</h5></a>
 
-<img src={user.photoURL} alt="profile" />
+  <h1>Hi {user.displayName}</h1>
 
-<h2>Name</h2>
-<p>{user.displayName}</p>
-<h2>Email</h2>
-<p>{user.email}</p>
+  <img src={user.photoURL} alt="profile" />
 
-<button
-  on:click={() => {
-    auth.signOut();
-    $goto("/");
-  }}>Sign Out</button
->
+  <h2>Name</h2>
+  <p>{user.displayName}</p>
+  <h2>Email</h2>
+  <p>{user.email}</p>
+
+  <button
+    on:click={() => {
+      auth.signOut();
+      $goto("/");
+    }}>Sign Out</button
+  >
+</div>

@@ -1,20 +1,9 @@
 <script>
-  import { metatags } from "@roxi/routify";
-  metatags.title = "consoa";
-  metatags.description = "Description coming soon...";
-
   import { Collection } from "sveltefire";
-
-  let postText = "";
-  let postImgURL = "";
-
   export let scoped;
   $: ({ user } = scoped);
   let user;
-
-  const onImageLoad = (e) => {
-    console.log(e);
-  };
+  let postImgURL = "";
 </script>
 
 <Collection
@@ -28,30 +17,34 @@
     No posts yet...
   {/if}
 
+  <nav>
+    <form
+      on:submit|preventDefault={() =>
+        postsRef.add({
+          createdAt: Date.now(),
+          creatorID: user.uid,
+          creatorName: user.displayName,
+          creatorPhoto: user.photoURL,
+          imgURL: postImgURL,
+        })}
+    >
+      <input type="text" bind:value={postImgURL} placeholder="Add Image" />
+    </form>
+
+    <a href="/user" class="user">
+      <span style="margin-right: 1ch;">User</span>
+      <img src={user.photoURL} alt="profile" class="user-image" />
+    </a>
+  </nav>
+
   <section id="posts">
-    <!-- class:wide="{current === 'foo'}"  -->
     {#each posts as post}
       <div class="post">
-        <!-- <p>
-          {JSON.stringify(post, Objct.keys(post).sort())}
-        </p> -->
-        <!-- <div class="post-creator">
-          <img src={post.creatorPhoto} alt="poster's profile" />
-          <p>{post.creatorName}</p>
-        </div> -->
-        <!-- <h2>{post.text}</h2> -->
         <a href="/post/{post.id}">
           {#if post.imgURL}
-            <img
-              src={post.imgURL}
-              alt="post"
-              class="post-image"
-              on:load={(e) => onImageLoad(e)}
-            />
+            <img src={post.imgURL} alt="post" class="post-image" />
           {/if}
         </a>
-        <!-- <small>{new Date(post.createdAt)}</small>
-        <button on:click={() => post.ref.delete()}>Delete</button> -->
       </div>
     {/each}
   </section>
@@ -60,8 +53,6 @@
 
 <style>
   .post-image {
-    /* object-fit: cover; */
-    /* height: 100%; */
     width: 100%;
     display: block;
   }
@@ -76,22 +67,27 @@
     padding: 0;
   }
 
-  /* section {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(calc(100px + 5vw), 1fr));
-    grid-auto-rows: 1fr;
+  nav {
+    display: flex;
+    height: 2rem;
+    justify-content: space-between;
+    max-width: 100rem;
+    margin: auto;
+    align-items: center;
+    padding: 0 1rem;
+  }
+  nav > * {
+    margin: 0;
   }
 
-  section::before {
-    content: "";
-    width: 0;
-    padding-bottom: 100%;
-    grid-row: 1 / 1;
-    grid-column: 1 / 1;
+  .brand {
+    height: 100%;
   }
-
-  section > *:first-child {
-    grid-row: 1 / 1;
-    grid-column: 1 / 1;
-  } */
+  .user {
+    align-items: center;
+    display: flex;
+  }
+  .user-image {
+    height: 2rem;
+  }
 </style>

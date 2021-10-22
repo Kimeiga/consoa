@@ -9,7 +9,7 @@
 </script>
 
 <User persist={localStorage} let:user let:auth>
-  <Navbar profileImgURL={user.photoURL} />
+  <!-- <Navbar profileImgURL={user.photoURL} /> -->
 
   <slot scoped={{ user, auth }} />
 
