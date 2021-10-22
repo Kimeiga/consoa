@@ -5,16 +5,8 @@
 
   import { Collection } from "sveltefire";
 
-  let postText = "";
-  let postImgURL = "";
-
   export let scoped;
   $: ({ user } = scoped);
-  let user;
-
-  const onImageLoad = (e) => {
-    console.log(e);
-  };
 </script>
 
 <Collection
@@ -29,29 +21,13 @@
   {/if}
 
   <section id="posts">
-    <!-- class:wide="{current === 'foo'}"  -->
     {#each posts as post}
       <div class="post">
-        <!-- <p>
-          {JSON.stringify(post, Objct.keys(post).sort())}
-        </p> -->
-        <!-- <div class="post-creator">
-          <img src={post.creatorPhoto} alt="poster's profile" />
-          <p>{post.creatorName}</p>
-        </div> -->
-        <!-- <h2>{post.text}</h2> -->
         <a href="/post/{post.id}">
           {#if post.imgURL}
-            <img
-              src={post.imgURL}
-              alt="post"
-              class="post-image"
-              on:load={(e) => onImageLoad(e)}
-            />
+            <img src={post.imgURL} alt="post" class="post-image" />
           {/if}
         </a>
-        <!-- <small>{new Date(post.createdAt)}</small>
-        <button on:click={() => post.ref.delete()}>Delete</button> -->
       </div>
     {/each}
   </section>
@@ -60,8 +36,6 @@
 
 <style>
   .post-image {
-    /* object-fit: cover; */
-    /* height: 100%; */
     width: 100%;
     display: block;
   }
@@ -75,23 +49,4 @@
     max-width: 100% !important;
     padding: 0;
   }
-
-  /* section {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(calc(100px + 5vw), 1fr));
-    grid-auto-rows: 1fr;
-  }
-
-  section::before {
-    content: "";
-    width: 0;
-    padding-bottom: 100%;
-    grid-row: 1 / 1;
-    grid-column: 1 / 1;
-  }
-
-  section > *:first-child {
-    grid-row: 1 / 1;
-    grid-column: 1 / 1;
-  } */
 </style>
