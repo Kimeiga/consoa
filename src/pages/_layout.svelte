@@ -8,12 +8,14 @@
   const googleProvider = new firebase.auth.GoogleAuthProvider();
 </script>
 
-<User persist={localStorage} let:user let:auth>
-  <!-- <Navbar profileImgURL={user.photoURL} /> -->
+<!-- <User persist={localStorage} let:user let:auth> -->
+<!-- <Navbar profileImgURL={user.photoURL} /> -->
 
-  <slot scoped={{ user, auth }} />
+<slot />
 
-  <div slot="signed-out">
+<!-- <div slot="signed-out" /> -->
+
+<!-- <div slot="signed-out">
     <h1>Consoa</h1>
     <h3>haki's social network ;)</h3>
     <hr />
@@ -24,8 +26,8 @@
     >
       Sign In With Google
     </button>
-  </div>
-</User>
+  </div> -->
 
+<!-- </User> -->
 <style>
 </style>

@@ -4,6 +4,11 @@
   $: ({ user } = scoped);
   let user;
   let postImgURL = "";
+  import { User } from "sveltefire";
+
+  import { getContext } from "svelte";
+  const firebase = getContext("firebase").getFirebase();
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
 </script>
 
 <Collection
@@ -17,25 +22,48 @@
     No posts yet...
   {/if}
 
-  <nav>
-    <form
-      on:submit|preventDefault={() =>
-        postsRef.add({
-          createdAt: Date.now(),
-          creatorID: user.uid,
-          creatorName: user.displayName,
-          creatorPhoto: user.photoURL,
-          imgURL: postImgURL,
-        })}
-    >
-      <input type="text" bind:value={postImgURL} placeholder="Add Image" />
-    </form>
+  <User persist={localStorage} let:user let:auth>
+    <nav>
+      <form
+        on:submit|preventDefault={() =>
+          postsRef.add({
+            createdAt: Date.now(),
+            creatorID: user.uid,
+            creatorName: user.displayName,
+            creatorPhoto: user.photoURL,
+            imgURL: postImgURL,
+          })}
+      >
+        <input type="text" bind:value={postImgURL} placeholder="Add Image" />
+      </form>
 
-    <a href="/user" class="user">
-      <span style="margin-right: 1ch;">User</span>
-      <img src={user.photoURL} alt="profile" class="user-image" />
-    </a>
-  </nav>
+      <a href="/user" class="user">
+        <span style="margin-right: 1ch;">User</span>
+        <img src={user.photoURL} alt="profile" class="user-image" />
+      </a>
+    </nav>
+
+    <div slot="signed-out">
+      <nav>
+        <form>
+          <input
+            type="text"
+            bind:value={postImgURL}
+            placeholder="Add Image"
+            disabled
+          />
+        </form>
+
+        <button
+          on:click={() => {
+            auth.signInWithPopup(googleProvider);
+          }}
+        >
+          Sign In With Google
+        </button>
+      </nav>
+    </div>
+  </User>
 
   <section id="posts">
     {#each posts as post}
