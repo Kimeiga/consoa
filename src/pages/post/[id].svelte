@@ -3,27 +3,12 @@
   export let id;
 
   import { Doc, Collection } from "sveltefire";
-
-  let zoom = false;
 </script>
 
 <Doc path={`posts/${id}`} log let:data={post} let:ref={postRef} on:data on:ref>
   <div class="post">
     {#if post.imgURL}
-      {#if !zoom}
-        <div
-          class="img-box"
-          style="background-image: url({post.imgURL})"
-          on:click={() => (zoom = !zoom)}
-        />
-      {:else}
-        <img
-          class="zoom-img"
-          src={post.imgURL}
-          on:click={() => (zoom = !zoom)}
-          alt="post"
-        />
-      {/if}
+      <div class="img-box" style="background-image: url({post.imgURL})" />
     {/if}
 
     <div class="post-creator">
@@ -54,19 +39,12 @@
 </Doc>
 
 <style>
-  .zoom-img {
-    width: 100%;
-    cursor: zoom-out !important;
-  }
   .img-box {
     max-width: 100%;
     width: auto;
-    height: calc(100vh - 2rem);
+    height: 100vh;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
-
-    transition: transform 0.25s ease;
-    cursor: zoom-in;
   }
 </style>
